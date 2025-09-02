@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 100px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #e9ecef;
+            text-align: left;
+        }
+        .result p {
+            margin: 8px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .result strong {
+            color: #007bff;
+        }
+        .positive { color: green; font-weight: bold; }
+        .negative { color: red; font-weight: bold; }
+        .neutral { color: orange; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Sentiment Analyzer</h1>
+        <form method="POST">
+            <textarea name="text_to_analyze" placeholder="Enter text here to analyze its sentiment..." required>{{ input_text }}</textarea>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if sentiment %}
+            <div class="result">
+                <p><strong>Original Text:</strong> "{{ input_text }}"</p>
+                <p><strong>Predicted Sentiment:</strong> <span class="{{ sentiment.label | lower }}">{{ sentiment.label }}</span></p>
+                <p><strong>Confidence Score:</strong> {{ sentiment.score }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
